@@ -17,22 +17,25 @@ class HomeScreen extends React.Component {
       <View>
         <Text>Hello, Chat App!</Text>
         <Button
-          onPress={() => navigate('Chat')}
-          title="Chat with Lucy"
+          onPress={() => navigate('Chat', { user: 'Oleg' })}
+          title="Chat"
         />
       </View>
     );
   }
 }
 
+
 class ChatScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Chat with Lucy',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: `Chat with ${navigation.state.params.user}`,
+  });
   render() {
+  	// The screen's current route is passed in to `props.navigation.state`:
+    const { params } = this.props.navigation.state;
     return (
       <View>
-        <Text>Chat with Lucy</Text>
+        <Text>Chat with {params.user}</Text>
       </View>
     );
   }
